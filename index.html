@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to [Village Name]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4a8f29;
+            --secondary-color: #f5a623;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --text-color: #555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #3a7320;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 15px auto;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        /* Hero Slider */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            width: 80%;
+        }
+        
+        .slide-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .slide-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--light-color);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .village-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            min-width: 150px;
+        }
+        
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-item h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Places Section */
+        .places {
+            background: white;
+        }
+        
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .place-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .place-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .place-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .place-card:hover .place-img img {
+            transform: scale(1.1);
+        }
+        
+        .place-info {
+            padding: 20px;
+        }
+        
+        .place-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .place-info p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .place-category {
+            display: inline-block;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background: var(--light-color);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+        }
+        
+        .gallery-item img, .gallery-item iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Businesses Section */
+        .businesses {
+            background: white;
+        }
+        
+        .business-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            padding: 8px 15px;
+            background: var(--light-color);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .business-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .business-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .business-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .business-info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .business-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .business-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .business-meta i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .business-contact {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* People Section */
+        .people {
+            background: var(--light-color);
+        }
+        
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .person-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .person-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light-color);
+        }
+        
+        .person-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .person-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .person-role {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .person-bio {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-links a {
+            color: var(--dark-color);
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Services Section */
+        .services {
+            background: white;
+        }
+        
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: var(--light-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-item {
+            background: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .service-item h3 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-item h3 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .service-meta {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .service-meta span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .service-meta i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        /* Visitors Section */
+        .visitors {
+            background: var(--light-color);
+        }
+        
+        .visitor-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .food-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .food-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .food-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .food-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        .social-media {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-media a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            color: var(--dark-color);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-media a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+        }
+        
+        .map-container {
+            height: 400px;
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .slide-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">[Village Name]</div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#places">Places</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#businesses">Businesses</a></li>
+                    <li><a href="#people">People</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero" id="home">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <h1>Welcome to [Village Name]</h1>
+                    <p>Discover the beauty, culture, and heritage of our peaceful village</p>
+                    <a href="#about" class="btn">Explore More</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <h1>Rich Cultural Heritage</h1>
+                    <p>Experience our traditional festivals and age-old customs</p>
+                    <a href="#gallery" class="btn">View Events</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');">
+                <div class="slide-content">
+                    <h1>Natural Beauty</h1>
+                    <p>Explore our scenic landscapes, rivers, and countryside</p>
+                    <a href="#places" class="btn">See Places</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Our Village</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>History & Origin</h3>
+                    <p>[Village Name] was established in [year] by [founders]. The name "[Village Name]" comes from [explanation of name origin]. Our village has a rich history that spans centuries, with many stories passed down through generations.</p>
+                    <p>The cultural background of our village is a blend of [describe cultural influences]. We take pride in our traditions while embracing modern development.</p>
+                    
+                    <div class="village-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <h3>1,200+</h3>
+                            <p>Residents</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>150+</h3>
+                            <p>Years Old</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-landmark"></i>
+                            <h3>5+</h3>
+                            <p>Heritage Sites</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Village Overview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Places Section -->
+    <section class="places" id="places">
+        <div class="container">
+            <h2 class="section-title">Places of Interest</h2>
+            <div class="places-grid">
+                <!-- Temple -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="https://images.unsplash.com/photo-1589409514080-6ee3475103e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Village Temple">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Religious</span>
+                        <h3>[Village Name] Temple</h3>
+                        <p>A beautiful temple dedicated to [deity name], built in [year]. The annual festival here attracts visitors from surrounding villages.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- River -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="https://images.unsplash.com/photo-1437482078695-8d9d02a82a4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Village River">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Nature</span>
+                        <h3>[River Name] River</h3>
+                        <p>The lifeline of our village, this river provides water for irrigation and is a popular spot for picnics and fishing.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Historical Place -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Historical Building">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Historical</span>
+                        <h3>Old [Building Name]</h3>
+                        <p>This [type of building] from the [century] century showcases the architectural style of that era and has been carefully preserved.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Mosque/Church -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Religious Place">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Religious</span>
+                        <h3>[Mosque/Church Name]</h3>
+                        <p>An important place of worship for our [religious community], known for its peaceful atmosphere and community services.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Hill Viewpoint -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Hill View">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Nature</span>
+                        <h3>[Hill Name] Viewpoint</h3>
+                        <p>Offers breathtaking panoramic views of the village and surrounding countryside, especially beautiful at sunrise.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Community Center -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="https://images.unsplash.com/photo-1593113598332-cd59a93c6138?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Community Center">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Community</span>
+                        <h3>Village Community Center</h3>
+                        <p>The hub of social activities, hosting weddings, meetings, and cultural events throughout the year.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery & Videos</h2>
+            <div class="gallery-grid">
+                <!-- Images -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Harvest Festival">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cultural Dance">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Village Sunset">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Traditional Crafts">
+                </div>
+                
+                <!-- Videos -->
+                <div class="gallery-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Businesses Section -->
+    <section class="businesses" id="businesses">
+        <div class="container">
+            <h2 class="section-title">Local Businesses & Services</h2>
+            
+            <div class="business-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="shop">Shops</button>
+                <button class="category-btn" data-category="food">Food</button>
+                <button class="category-btn" data-category="service">Services</button>
+                <button class="category-btn" data-category="farm">Farms</button>
+            </div>
+            
+            <div class="business-grid">
+                <!-- Grocery Shop -->
+                <div class="business-card" data-category="shop">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Grocery Shop">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Owner's Name] Grocery</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-store"></i>
+                            <span>Grocery & General Store</span>
+                        </div>
+                        <p>Family-run store offering all daily necessities, fresh produce, and household items.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Restaurant -->
+                <div class="business-card" data-category="food">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Village Restaurant">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Restaurant Name]</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-utensils"></i>
+                            <span>Traditional Cuisine</span>
+                        </div>
+                        <p>Serving authentic local dishes made with fresh ingredients from our village.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tailor -->
+                <div class="business-card" data-category="service">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1598706643923-8265daa598a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tailor Shop">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Tailor's Name] Tailoring</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-cut"></i>
+                            <span>Clothing & Alterations</span>
+                        </div>
+                        <p>Expert tailoring services for traditional and modern clothing with quick turnaround.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vehicle Repair -->
+                <div class="business-card" data-category="service">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Vehicle Repair">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Mechanic's Name] Repair Shop</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-car"></i>
+                            <span>Vehicle Services</span>
+                        </div>
+                        <p>Full-service repair for motorcycles, bicycles, and agricultural vehicles.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Farm -->
+                <div class="business-card" data-category="farm">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Organic Farm">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Farm Name] Organic Farm</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-tractor"></i>
+                            <span>Organic Produce</span>
+                        </div>
+                        <p>Growing chemical-free vegetables and fruits using traditional farming methods.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tea Stall -->
+                <div class="business-card" data-category="food">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tea Stall">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Owner's Name] Tea Stall</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>Snacks & Beverages</span>
+                        </div>
+                        <p>The village gathering spot for tea, snacks, and lively conversations.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- People Section -->
+    <section class="people" id="people">
+        <div class="container">
+            <h2 class="section-title">Prominent People</h2>
+            <div class="people-grid">
+                <!-- Teacher -->
+                <div class="person-card">
+                    <div class="person-img">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80" alt="Teacher">
+                    </div>
+                    <div class="person-info">
+                        <h3>[Teacher's Name]</h3>
+                        <div class="person-role">Retired School Teacher</div>
+                        <p class="person-bio">Taught generations of village children for over 35 years. Known for dedication to education and community development.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artist -->
+                <div class="person-card">
+                    <div class="person-img">
+                        <img src="https://images.unsplash.com/photo-1546820389-44d77e1f3b31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80" alt="Artist">
+                    </div>
+                    <div class="person-info">
+                        <h3>[Artist's Name]</h3>
+                        <div class="person-role">Traditional Artist</div>
+                        <p class="person-bio">Master of [art form] who has exhibited work nationally. Conducts workshops to preserve traditional art forms.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NRI Contributor -->
+                <div class="person-card">
+                    <div class="person-img">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="NRI Contributor">
+                    </div>
+                    <div class="person-info">
+                        <h3>[Person's Name]</h3>
+                        <div class="person-role">NRI Community Leader</div>
+                        <p class="person-bio">Based in [country] but actively supports village development projects and education initiatives.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Worker -->
+                <div class="person-card">
+                    <div class="person-img">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1961&q=80" alt="Social Worker">
+                    </div>
+                    <div class="person-info">
+                        <h3>[Person's Name]</h3>
+                        <div class="person-role">Social Worker</div>
+                        <p class="person-bio">Founded several women's self-help groups and youth programs to empower the community.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Essential Services</h2>
+            
+            <div class="services-tabs">
+                <button class="tab-btn active" data-tab="education">Education</button>
+                <button class="tab-btn" data-tab="healthcare">Healthcare</button>
+                <button class="tab-btn" data-tab="financial">Financial</button>
+                <button class="tab-btn" data-tab="public">Public Services</button>
+            </div>
+            
+            <div class="tab-content active" id="education">
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3><i class="fas fa-school"></i> [School Name] Primary School</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Near [landmark], [Village Name]</span>
+                            <span><i class="fas fa-clock"></i> Mon-Fri: 8:30 AM - 3:30 PM</span>
+                            <span><i class="fas fa-phone"></i> +91 XXXX XXX XXX</span>
+                        </div>
+                        <p>Provides education from LKG to 5th standard with qualified teachers and modern facilities.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3><i class="fas fa-graduation-cap"></i> [School Name] High School</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> [Location], [Village Name]</span>
+                            <span><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 4:00 PM</span>
+                            <span><i class="fas fa-phone"></i> +91 XXXX XXX XXX</span>
+                        </div>
+                        <p>Offers education up to 10th standard with science and computer labs.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3><i class="fas fa-book"></i> Village Library</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Next to Community Center</span>
+                            <span><i class="fas fa-clock"></i> Tue-Sun: 10:00 AM - 6:00 PM</span>
+                        </div>
+                        <p>Collection of over 2,000 books in multiple languages, including textbooks and literature.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="healthcare">
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3><i class="fas fa-hospital"></i> [Clinic Name] Health Center</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Main Road, [Village Name]</span>
+                            <span><i class="fas fa-clock"></i> 24/7 Emergency Services</span>
+                            <span><i class="fas fa-phone"></i> +91 XXXX XXX XXX</span>
+                        </div>
+                        <p>Basic healthcare services with a doctor available daily from 9 AM to 1 PM.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3><i class="fas fa-briefcase-medical"></i> [Name] Pharmacy</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Near Health Center</span>
+                            <span><i class="fas fa-clock"></i> Daily: 8:00 AM - 8:00 PM</span>
+                            <span><i class="fas fa-phone"></i> +91 XXXX XXX XXX</span>
+                        </div>
+                        <p>Well-stocked pharmacy with all essential medicines and first-aid supplies.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="financial">
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3><i class="fas fa-university"></i> [Bank Name] Branch</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Village Center</span>
+                            <span><i class="fas fa-clock"></i> Mon-Fri: 10:00 AM - 4:00 PM, Sat: 10:00 AM - 1:00 PM</span>
+                            <span><i class="fas fa-phone"></i> +91 XXXX XXX XXX</span>
+                        </div>
+                        <p>Full-service bank with ATM facility offering savings accounts, loans, and government schemes.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3><i class="fas fa-envelope"></i> Post Office</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Near Panchayat Office</span>
+                            <span><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 5:00 PM, Sat: 9:00 AM - 1:00 PM</span>
+                        </div>
+                        <p>Provides postal services, savings accounts, and money orders.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="public">
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3><i class="fas fa-landmark"></i> Village Panchayat Office</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Center of Village</span>
+                            <span><i class="fas fa-clock"></i> Mon-Fri: 10:00 AM - 5:00 PM</span>
+                            <span><i class="fas fa-phone"></i> +91 XXXX XXX XXX</span>
+                        </div>
+                        <p>Administrative center for all government services and certificates.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3><i class="fas fa-bus"></i> Bus Stand</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Entrance of Village</span>
+                            <span><i class="fas fa-clock"></i> First bus at 6:00 AM, Last at 8:00 PM</span>
+                        </div>
+                        <p>Connects to nearby towns with regular bus services throughout the day.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3><i class="fas fa-hand-holding-water"></i> Water Supply</h3>
+                        <div class="service-meta">
+                            <span><i class="fas fa-clock"></i> Morning: 6:00 AM - 8:00 AM, Evening: 5:00 PM - 7:00 PM</span>
+                        </div>
+                        <p>Village water supply schedule and contact for pipeline issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visitors Section -->
+    <section class="visitors" id="visitors">
+        <div class="container">
+            <h2 class="section-title">Information for Visitors</h2>
+            
+            <div class="visitor-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-map-marked-alt"></i> How to Reach</h3>
+                    <p><strong>By Road:</strong> [Village Name] is connected by well-maintained roads from [nearest town/city]. Regular bus services are available from [bus station name].</p>
+                    <p><strong>By Train:</strong> The nearest railway station is [station name], about [distance] km away. Auto-rickshaws and taxis are available from the station.</p>
+                    <p><strong>By Air:</strong> The closest airport is [airport name], approximately [distance] km from the village.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Best Time to Visit</h3>
+                    <p>The ideal time to visit [Village Name] is between [month] and [month] when the weather is pleasant and major festivals take place.</p>
+                    <p><strong>Major Festivals:</strong></p>
+                    <ul>
+                        <li>[Festival Name] - [Month]: [Brief description]</li>
+                        <li>[Festival Name] - [Month]: [Brief description]</li>
+                        <li>[Festival Name] - [Month]: [Brief description]</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-utensils"></i> Local Food</h3>
+                    <div class="food-item">
+                        <div class="food-img">
+                            <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1998&q=80" alt="Local Dish">
+                        </div>
+                        <div class="food-info">
+                            <h4>[Dish Name]</h4>
+                            <p>Traditional dish made with [main ingredients]. Best enjoyed at [place recommendation].</p>
+                        </div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-img">
+                            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1971&q=80" alt="Local Dish">
+                        </div>
+                        <div class="food-info">
+                            <h4>[Dish Name]</h4>
+                            <p>Specialty sweet/dish prepared during [occasion/festival].</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-bed"></i> Places to Stay</h3>
+                    <p><strong>Homestays:</strong> Several families offer homestay accommodations with authentic local experiences.</p>
+                    <p><strong>Nearby Hotels:</strong> For more formal accommodations, these options are available in [nearby town]:</p>
+                    <ul>
+                        <li>[Hotel Name] - [distance] km, +91 XXXX XXX XXX</li>
+                        <li>[Hotel Name] - [distance] km, +91 XXXX XXX XXX</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions about our village or planning to visit? Reach out to us through any of these channels.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>[Village Name], [Taluk Name]<br>
+                                [District Name], [State Name]<br>
+                                India - [PIN Code]</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>Village Office: +91 XXXX XXX XXX<br>
+                                Emergency: +91 XXXX XXX XXX</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contact@[villagename].in<br>
+                                info@[villagename].in</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Follow Us</h3>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.801901946349!2d77.56268231482136!3d12.9236909908877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1583b8d7c1bd%3A0x7a1a53e4b8e3f1d5!2sBangalore%20Palace!5e0!3m2!1sen!2sin!4v1623836543854!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>[Village Name]</h3>
+                    <p>A peaceful village with rich heritage and natural beauty. Come experience our culture and hospitality.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#places">Places</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#businesses">Businesses</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Education</a></li>
+                        <li><a href="#services">Healthcare</a></li>
+                        <li><a href="#services">Financial</a></li>
+                        <li><a href="#services">Public Services</a></li>
+                        <li><a href="#visitors">Visitor Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+91XXXXXXXXXX"><i class="fas fa-phone"></i> +91 XXXX XXX XXX</a></li>
+                        <li><a href="mailto:contact@[villagename].in"><i class="fas fa-envelope"></i> contact@[villagename].in</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> [Village Address]</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 [Village Name]. All Rights Reserved. | Designed with ❤️ for our village</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Image Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Business Category Filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const businessCards = document.querySelectorAll('.business-card');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                categoryBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // Filter business cards
+                businessCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Services Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
